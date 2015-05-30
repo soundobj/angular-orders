@@ -1,16 +1,16 @@
 var RootCtrl = (function () {
     function RootCtrl() {
-        this.brand = "Rechannel";
+        this.brand = "Angular";
         this.navStates = [
-            { state: "root.retailers", title: "RETAILERS" },
-            { state: "root.orders", title: "ORDERS" }
+            { state: "root.vending", title: "Vending Machine" },
+            { state: "root.service", title: "Service Vending Machine" },
         ];
     }
     return RootCtrl;
 })();
 
-angular.module("Rechannel", ["ui.router","pascalprecht.translate"]).controller("RootCtrl", RootCtrl)
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider,$translateProvider) {
+angular.module("Vending", ["ui.router"]).controller("RootCtrl", RootCtrl)
+    .config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider.state({
         name: "root",
         url: "/",
@@ -19,25 +19,6 @@ angular.module("Rechannel", ["ui.router","pascalprecht.translate"]).controller("
         templateUrl: "root.html"
     });
     $urlRouterProvider.otherwise("/");
-
-    // should be abstracted into config file
-    var translations = {
-        RETAILERS: 'Retailers',
-        ORDERS: 'Orders',
-        NAME: 'Name',
-        RETAILER: 'Retailer',
-        EMAIL: 'Email',
-        TELEPHONE: 'Telephone',
-        RETAIL_BUYERS: 'Retail Buyers',
-        BUYER : 'Buyer',
-        DATE: 'Date',
-        TOTAL: 'Total',
-        STATUS: 'Status'
-    };
-
-    $translateProvider
-        .translations('en', translations)
-        .preferredLanguage('en');
 
 }).run(function ($state, $rootScope) {
     $rootScope.$state = $state;
